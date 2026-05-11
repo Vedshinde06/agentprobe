@@ -65,3 +65,25 @@ class RunSummary(BaseModel):
     total_tests: int = 0
     passed: int = 0
     failed: int = 0
+
+
+class CreateRunResponse(BaseModel):
+    run_id: str
+    status: RunStatus
+
+
+class TestResultSummary(BaseModel):
+    test_id: str
+    category: TestCategory
+    verdict: Optional[Verdict] = None
+    latency_ms: Optional[int] = None
+
+
+class RunResponse(BaseModel):
+    run_id: str
+    status: RunStatus
+    endpoint_url: str
+    corpus_id: str
+    created_at: datetime
+    summary: Optional[RunSummary] = None
+    tests: list[TestResultSummary] = Field(default_factory=list)
