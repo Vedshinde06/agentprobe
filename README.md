@@ -2,7 +2,9 @@
 
 > Stress-tests RAG agents and surfaces where they actually fail.
 
-[Live demo](https://agentprobe.vercel.app) · [90s video](youtube/loom) · [Sample run](https://agentprobe.vercel.app/runs/demo)
+🚀 **Live: https://agentprobe-xi.vercel.app**
+
+[90s video](youtube/loom) · [Sample run](https://agentprobe-xi.vercel.app/runs/demo)
 
 ## Why
 
