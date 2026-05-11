@@ -8,6 +8,8 @@ import aiosqlite
 from backend.schemas import JudgeResult, RunStatus, RunSummary, TestResult
 
 DB_PATH = Path(__file__).parent / "agentprobe.db"
+# TODO Day 3: Railway filesystem resets on redeploy — DB_PATH is ephemeral.
+# Switch to Railway volume mount: set DB_PATH = Path(os.environ["RAILWAY_VOLUME_MOUNT_PATH"]) / "agentprobe.db"
 
 
 async def init_db() -> None:
