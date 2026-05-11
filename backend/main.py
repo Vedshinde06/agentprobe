@@ -1,8 +1,9 @@
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, HTTPException
+from fastapi import BackgroundTasks, FastAPI, HTTPException
 
 from backend import db
+from backend.runner import run_evaluation
 from backend.schemas import (
     CreateRunRequest,
     CreateRunResponse,
@@ -23,8 +24,9 @@ app = FastAPI(title="AgentProbe", lifespan=lifespan)
 
 
 @app.post("/runs", response_model=CreateRunResponse)
-async def create_run(body: CreateRunRequest):
+async def create_run(body: CreateRunRequest, background_tasks: BackgroundTasks):
     run_id = await db.create_run(str(body.endpoint_url), body.corpus_id)
+    background_tasks.add_task(run_evaluation, run_id, str(body.endpoint_url), body.corpus_id)
     return CreateRunResponse(run_id=run_id, status="pending")
 
 
